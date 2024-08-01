@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Loader from "../Loader";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/cartslice/cartSlice";
+import toast from "react-hot-toast";
 
 export default function ProductList({ products, loading, page }) {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export default function ProductList({ products, loading, page }) {
   const addToCartHandler = (id, price, title, image, quantity) => {
     // console.log(id, price, title, image);;
     dispatch(addToCart(id, price, title, image, quantity));
+    toast.success("Added To Cart Successfully");
   };
   return (
     <div className="bg-white">

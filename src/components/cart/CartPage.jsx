@@ -8,6 +8,7 @@ import {
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "../../store/cartslice/cartSlice";
+import toast from "react-hot-toast";
 
 export default function CartPage({ open, setOpen }) {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function CartPage({ open, setOpen }) {
   const removeHandler = (id) => {
     // console.log(id);
     dispatch(removeFromCart(id));
+    toast.success("Removed from Cart");
   };
 
   return (

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkauth, login, logout } from "../../store/authSlice/authSlice";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -42,6 +45,8 @@ export default function Login() {
           token: data.token,
         })
       );
+      toast.success(`Welcome Back ${data.username}`);
+      navigate("/");
     } catch (error) {
       console.log(error);
       setError("Incorrect Email Or Password");

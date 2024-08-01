@@ -28,7 +28,6 @@ import {
 import { useSelector } from "react-redux";
 import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
-import Pagination from "../pagination/Pagination";
 
 const sortOptions = [
   //   { name: "Most Popular", href: "#", current: true },
@@ -100,8 +99,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchProduct, setSearchProducts] = useState("");
-  const limit = useState(20);
-  const [skipProduct, setSkipProduct] = useState(0);
+
   const [page, setPage] = useState(1);
 
   const [url, setUrl] = useState("https://dummyjson.com/products?limit=100");
@@ -109,11 +107,6 @@ const Home = () => {
   const searchProductHandler = (e) => {
     setSearchProducts(e.target.value);
     setUrl(`https://dummyjson.com/products/search?q=${e.target.value}`);
-  };
-
-  const skipProductHandler = (value) => {
-    setSkipProduct(value);
-    // setUrl(`https://dummyjson.com/products?limit=${limit}&skip=${skipProduct}`);
   };
 
   const selectproductcategoryhandler = (id, url) => {

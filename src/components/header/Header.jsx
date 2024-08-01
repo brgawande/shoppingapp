@@ -11,24 +11,37 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { checkauth, logout } from "../../store/authSlice/authSlice";
+import toast from "react-hot-toast";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Header({ isAuthenticated }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userinfo = JSON.parse(localStorage.getItem("userInfo"));
   //   console.log("userinfo", userinfo);
 
   const signoutHandler = () => {
     dispatch(logout());
+    toast.success("LoggedOut Successfully");
   };
   useEffect(() => {
     dispatch(checkauth());
   }, [dispatch]);
+
+  const navigationHandler = (e) => {
+    if (!isAuthenticated) {
+      e.preventDefault();
+      //   console.log("login first");
+      toast.error("Please Login First!");
+    } else {
+      navigate("/");
+    }
+  };
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -61,6 +74,7 @@ export default function Header({ isAuthenticated }) {
               <div className="flex space-x-4">
                 <Link
                   to={"/"}
+                  onClick={navigationHandler}
                   className={classNames(
                     "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
                   )}

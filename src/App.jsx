@@ -5,6 +5,7 @@ import Login from "./components/login/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkauth } from "./store/authSlice/authSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -19,8 +20,12 @@ function App() {
       <Routes>
         <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
 
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={!isAuthenticated ? <Login /> : <Home />}
+        />
       </Routes>
+      <Toaster />
     </Router>
   );
 }
