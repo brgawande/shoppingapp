@@ -10,28 +10,25 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { checkauth, logout } from "../../store/authSlice/authSlice";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Header() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+export default function Header({ isAuthenticated }) {
+  const dispatch = useDispatch();
   const userinfo = JSON.parse(localStorage.getItem("userInfo"));
   //   console.log("userinfo", userinfo);
-  useEffect(() => {
-    const tokenstored = localStorage.getItem("token");
 
-    if (tokenstored) {
-      setIsAuthenticated(true);
-    }
-    console.log(isAuthenticated);
-  }, []);
-
+  const signoutHandler = () => {
+    dispatch(logout());
+  };
   useEffect(() => {
-    console.log(isAuthenticated);
-  }, [isAuthenticated]);
+    dispatch(checkauth());
+  }, [dispatch]);
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -95,7 +92,7 @@ export default function Header() {
                 >
                   <MenuItem>
                     <Link
-                      to={"/login"}
+                      onClick={signoutHandler}
                       className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
                     >
                       Sign out

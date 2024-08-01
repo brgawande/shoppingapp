@@ -27,16 +27,9 @@ export const counterSlice = createSlice({
         (item) => item.id !== action.payload
       );
     },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
-    },
   },
 });
 
-export const { addToCart, removeFromCart, decrement, incrementByAmount } =
-  counterSlice.actions;
+export const { addToCart, removeFromCart } = counterSlice.actions;
 
 export default counterSlice.reducer;

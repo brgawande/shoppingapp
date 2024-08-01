@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { checkauth, login, logout } from "../../store/authSlice/authSlice";
 
 export default function Login() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkauth());
+  }, [dispatch]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -20,19 +30,21 @@ export default function Login() {
         throw new Error("No user found");
       }
       const data = await response.json();
-      localStorage.setItem("token", data.token);
-      localStorage.setItem(
-        "userInfo",
-        JSON.stringify({
-          image: data.image,
-          username: data.username,
-          email: data.email,
-          firstname: data.firstName,
+      //   console.log(data);
+      dispatch(
+        login({
+          user: {
+            image: data.image,
+            username: data.username,
+            email: data.email,
+            firstname: data.firstName,
+          },
+          token: data.token,
         })
       );
-      //   console.log(data);
     } catch (error) {
       console.log(error);
+      setError("Incorrect Email Or Password");
     }
   };
 
@@ -113,7 +125,18 @@ export default function Login() {
               </button>
             </div>
           </form>
+          <p className="text-[red] pt-1">{error && error}</p>
         </div>
+
+        <p className="mt-10 text-center text-sm text-gray-500">
+          <a
+            target="_blank"
+            href="https://dummyjson.com/users"
+            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+          >
+            Select Users from here
+          </a>
+        </p>
       </div>
     </>
   );

@@ -28,6 +28,7 @@ import {
 import { useSelector } from "react-redux";
 import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
+import Pagination from "../pagination/Pagination";
 
 const sortOptions = [
   //   { name: "Most Popular", href: "#", current: true },
@@ -99,12 +100,19 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchProduct, setSearchProducts] = useState("");
+  const limit = useState(20);
+  const [skipProduct, setSkipProduct] = useState(0);
 
   const [url, setUrl] = useState("https://dummyjson.com/products?limit=100");
 
   const searchProductHandler = (e) => {
     setSearchProducts(e.target.value);
     setUrl(`https://dummyjson.com/products/search?q=${e.target.value}`);
+  };
+
+  const skipProductHandler = (value) => {
+    setSkipProduct(value);
+    // setUrl(`https://dummyjson.com/products?limit=${limit}&skip=${skipProduct}`);
   };
 
   const selectproductcategoryhandler = (id, url) => {
@@ -137,7 +145,7 @@ const Home = () => {
       }
     };
     fetchProducts();
-  }, [productCategory, url, searchProduct, sortOrder, sortTitle]);
+  }, [productCategory, url, searchProduct, sortOrder, sortTitle, skipProduct]);
 
   useEffect(() => {
     const fetchproductsCategory = async () => {
@@ -430,6 +438,39 @@ const Home = () => {
                     <div className="lg:col-span-3 -mt-20">
                       <div>
                         <ProductList products={products} loading={loading} />
+                      </div>
+                      {/* <Pagination /> */}
+                      <div className=" flex justify-center gap-5">
+                        <button
+                          onClick={() => skipProductHandler(0)}
+                          className=" px-4 py-1 bg-secondary text-white font-semibold"
+                        >
+                          1
+                        </button>
+                        <button
+                          onClick={() => skipProductHandler(20)}
+                          className=" px-4 py-1 bg-secondary text-white font-semibold"
+                        >
+                          2
+                        </button>
+                        <button
+                          onClick={() => skipProductHandler(40)}
+                          className=" px-4 py-1 bg-secondary text-white font-semibold"
+                        >
+                          3
+                        </button>
+                        <button
+                          onClick={() => skipProductHandler(60)}
+                          className=" px-4 py-1 bg-secondary text-white font-semibold"
+                        >
+                          4
+                        </button>
+                        <button
+                          onClick={() => skipProductHandler(80)}
+                          className=" px-4 py-1 bg-secondary text-white font-semibold"
+                        >
+                          5
+                        </button>
                       </div>
                     </div>
                   </div>
