@@ -112,6 +112,7 @@ const Home = () => {
   const selectproductcategoryhandler = (id, url) => {
     console.log(id, url);
     setUrl(url);
+    setPage(1);
     setProductCategory(id);
   };
 
@@ -119,6 +120,7 @@ const Home = () => {
     console.log(value);
     setSortTitle(value);
     setSortOrder(order);
+    setPage(1);
     setUrl(`https://dummyjson.com/products?sortBy=${value}&order=${order}`);
   };
 
