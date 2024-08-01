@@ -59,7 +59,7 @@ export default function ProductList({ products, loading }) {
                   <div className="flex items-center justify-between px-4">
                     {" "}
                     <p className="mt-1 text-lg font-medium text-gray-900">
-                      {product?.price}
+                      ${product?.price}
                     </p>
                     <Button
                       onClick={() =>

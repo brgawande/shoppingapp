@@ -88,7 +88,7 @@ export default function CartPage({ open, setOpen }) {
                                     <h3>
                                       <a>{product?.title}</a>
                                     </h3>
-                                    <p className="ml-4">{product?.price}</p>
+                                    <p className="ml-4">${product?.price}</p>
                                   </div>
                                 </div>
                                 <div className="flex flex-1 items-end justify-between text-sm">
