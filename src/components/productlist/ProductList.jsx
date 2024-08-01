@@ -87,7 +87,9 @@ export default function ProductList({ products, loading, page }) {
                 </a>
               ))
             ) : (
-              <h1 className="text-black bb">No Products found</h1>
+              <h1 className="text-black text-2xl  font-semibold">
+                No Products found
+              </h1>
             )}
           </div>
         </div>
