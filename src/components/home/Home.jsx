@@ -102,6 +102,7 @@ const Home = () => {
   const [searchProduct, setSearchProducts] = useState("");
   const limit = useState(20);
   const [skipProduct, setSkipProduct] = useState(0);
+  const [page, setPage] = useState(1);
 
   const [url, setUrl] = useState("https://dummyjson.com/products?limit=100");
 
@@ -437,39 +438,93 @@ const Home = () => {
                     {/* Product grid */}
                     <div className="lg:col-span-3 -mt-20">
                       <div>
-                        <ProductList products={products} loading={loading} />
+                        <ProductList
+                          products={products}
+                          loading={loading}
+                          page={page}
+                        />
                       </div>
                       {/* <Pagination /> */}
                       <div className=" flex justify-center gap-5">
                         <button
-                          onClick={() => skipProductHandler(0)}
-                          className=" px-4 py-1 bg-secondary text-white font-semibold"
+                          onClick={() => setPage(1)}
+                          className={`px-4 py-1 text-white font-semibold ${
+                            page === 1 ? "bg-primary" : "bg-secondary"
+                          }`}
                         >
                           1
                         </button>
                         <button
-                          onClick={() => skipProductHandler(20)}
-                          className=" px-4 py-1 bg-secondary text-white font-semibold"
+                          onClick={() => setPage(2)}
+                          className={`px-4 py-1 text-white font-semibold ${
+                            page === 2 ? "bg-primary" : "bg-secondary"
+                          }`}
                         >
                           2
                         </button>
                         <button
-                          onClick={() => skipProductHandler(40)}
-                          className=" px-4 py-1 bg-secondary text-white font-semibold"
+                          onClick={() => setPage(3)}
+                          className={`px-4 py-1 text-white font-semibold ${
+                            page === 3 ? "bg-primary" : "bg-secondary"
+                          }`}
                         >
                           3
                         </button>
                         <button
-                          onClick={() => skipProductHandler(60)}
-                          className=" px-4 py-1 bg-secondary text-white font-semibold"
+                          onClick={() => setPage(4)}
+                          className={`px-4 py-1 text-white font-semibold ${
+                            page === 4 ? "bg-primary" : "bg-secondary"
+                          }`}
                         >
                           4
                         </button>
                         <button
-                          onClick={() => skipProductHandler(80)}
-                          className=" px-4 py-1 bg-secondary text-white font-semibold"
+                          onClick={() => setPage(5)}
+                          className={`px-4 py-1 text-white font-semibold ${
+                            page === 5 ? "bg-primary" : "bg-secondary"
+                          }`}
                         >
                           5
+                        </button>
+                        <button
+                          onClick={() => setPage(6)}
+                          className={`px-4 py-1 text-white font-semibold ${
+                            page === 6 ? "bg-primary" : "bg-secondary"
+                          }`}
+                        >
+                          6
+                        </button>
+                        <button
+                          onClick={() => setPage(7)}
+                          className={`px-4 py-1 text-white font-semibold ${
+                            page === 7 ? "bg-primary" : "bg-secondary"
+                          }`}
+                        >
+                          7
+                        </button>
+                        <button
+                          onClick={() => setPage(8)}
+                          className={`px-4 py-1 text-white font-semibold ${
+                            page === 8 ? "bg-primary" : "bg-secondary"
+                          }`}
+                        >
+                          8
+                        </button>
+                        <button
+                          onClick={() => setPage(9)}
+                          className={`px-4 py-1 text-white font-semibold ${
+                            page === 9 ? "bg-primary" : "bg-secondary"
+                          }`}
+                        >
+                          9
+                        </button>
+                        <button
+                          onClick={() => setPage(10)}
+                          className={`px-4 py-1 text-white font-semibold ${
+                            page === 10 ? "bg-primary" : "bg-secondary"
+                          }`}
+                        >
+                          10
                         </button>
                       </div>
                     </div>
