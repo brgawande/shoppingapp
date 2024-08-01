@@ -50,9 +50,12 @@ export default function ProductList({ products, loading }) {
                   />
                 </div>
                 <div>
-                  <h3 className="mt-4 text-md text-black font-semibold text-center pb-2 ">
-                    {product?.title}
-                  </h3>
+                  <div>
+                    <h3 className="mt-4 text-md text-black font-semibold text-center pb-2 ">
+                      {product?.title}
+                    </h3>
+                  </div>
+
                   <div className="flex items-center justify-between px-4">
                     {" "}
                     <p className="mt-1 text-lg font-medium text-gray-900">

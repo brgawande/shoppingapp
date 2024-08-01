@@ -145,7 +145,7 @@ const Home = () => {
       }
     };
     fetchProducts();
-  }, [productCategory, url, searchProduct, sortOrder, sortTitle, skipProduct]);
+  }, [productCategory, url, searchProduct, sortOrder, sortTitle]);
 
   useEffect(() => {
     const fetchproductsCategory = async () => {
