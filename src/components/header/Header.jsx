@@ -11,6 +11,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
+
 import { Link, useNavigate } from "react-router-dom";
 import { checkauth, logout } from "../../store/authSlice/authSlice";
 import toast from "react-hot-toast";
