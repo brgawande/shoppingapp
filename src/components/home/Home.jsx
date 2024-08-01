@@ -30,11 +30,11 @@ import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
 
 const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
+  //   { name: "Most Popular", href: "#", current: true },
+  { name: "Best Rating", value: "rating", current: false, order: "asc" },
+  //   { name: "Newest", href: "#", current: false },
+  { name: "Price: Low to High", value: "price", current: false, order: "asc" },
+  { name: "Price: High to Low", value: "price", current: false, order: "desc" },
 ];
 const subCategories = [
   { name: "Totes", href: "#" },
@@ -88,6 +88,8 @@ function classNames(...classes) {
 const Home = () => {
   const [open, setOpen] = useState(true);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [sortTitle, setSortTitle] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
   const cartItems = useSelector((state) => state.cart.cartItems);
   //   console.log(cartItems.length);
 
@@ -111,6 +113,13 @@ const Home = () => {
     setProductCategory(id);
   };
 
+  const sortproductHandler = (value, order) => {
+    console.log(value);
+    setSortTitle(value);
+    setSortOrder(order);
+    setUrl(`https://dummyjson.com/products?sortBy=${value}&order=${order}`);
+  };
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -128,7 +137,7 @@ const Home = () => {
       }
     };
     fetchProducts();
-  }, [productCategory, url, searchProduct]);
+  }, [productCategory, url, searchProduct, sortOrder, sortTitle]);
 
   useEffect(() => {
     const fetchproductsCategory = async () => {
@@ -287,12 +296,18 @@ const Home = () => {
                           {sortOptions.map((option) => (
                             <MenuItem key={option.name}>
                               <a
+                                onClick={() =>
+                                  sortproductHandler(
+                                    option?.value,
+                                    option?.order
+                                  )
+                                }
                                 href={option.href}
                                 className={classNames(
                                   option.current
                                     ? "font-medium text-gray-900"
                                     : "text-gray-500",
-                                  "block px-4 py-2 text-sm data-[focus]:bg-gray-100"
+                                  "block px-4 py-2 text-sm data-[focus]:bg-gray-100 cursor-pointer"
                                 )}
                               >
                                 {option.name}
